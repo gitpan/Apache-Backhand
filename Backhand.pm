@@ -9,7 +9,7 @@ package Apache::Backhand;
 
 use strict;
 
-$Apache::Backhand::VERSION = '0.01';
+$Apache::Backhand::VERSION = '0.02';
 
 use Exporter;
 

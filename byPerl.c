@@ -36,7 +36,7 @@ extern SV *perl_bless_request_rec(request_rec *r);
  * BUGS:          Hopefully none.
  * ==================================================================== */
 int
-byPerl(request_rec *r, int *servers, int *n, char *arg) {
+byPerl(request_rec *r, ServerSlot *servers, int *n, char *arg) {
     int count, i;
     AV *tservers = newAV();
     SV *outref;
@@ -64,7 +64,7 @@ byPerl(request_rec *r, int *servers, int *n, char *arg) {
 
     /* Push everything else onto the stack as an array reference */
     for (i = 0; i < *n; i++) {
-        av_push(tservers, newSViv(servers[i]));
+        av_push(tservers, newSViv(servers[i].id));
     }
     XPUSHs(sv_2mortal(newRV((SV *)tservers)));
 
@@ -100,7 +100,7 @@ byPerl(request_rec *r, int *servers, int *n, char *arg) {
             return 0;
         }
         for (i = 0; i <= av_len(a); i++) {
-            servers[i] = SvIV(*(av_fetch(a, i, FALSE)));
+            servers[i].id = SvIV(*(av_fetch(a, i, FALSE)));
         }
         count = av_len(a) + 1;
     }

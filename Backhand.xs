@@ -64,6 +64,8 @@ backhand_load_serverstats()
                              newSV_magic_c_int(&(serverstats[i].load_hwm)),  0);
 		    hv_store(statsh, "cpu",       3,
                              newSV_magic_c_int(&(serverstats[i].cpu)),       0);
+                    hv_store(statsh, "ncpu",      4,
+                             newSV_magic_c_int(&(serverstats[i].ncpu)),      0);
 		    hv_store(statsh, "tmem",      4,
                              newSV_magic_c_int(&(serverstats[i].tmem)),      0);
 		    hv_store(statsh, "amem",      4,
